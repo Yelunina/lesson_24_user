@@ -10,7 +10,7 @@ public class User {
 
     public User(String email, String password) {
         setEmail(email);
-        this.password = password;
+        setPassword(password);
     }
 
     public String getEmail() {
@@ -68,18 +68,32 @@ public class User {
         if (passwordIsValid(password)) {
             this.password = password;
         } else {
-            System.out.println(password + " is not valid");
+            System.out.println("password is not valid");
         }
     }
+
     private boolean passwordIsValid(String password) {
+        boolean[] res = new boolean[5];
+        if (password.length() >= 8) {
+            res[0] = true;
+        }
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
-            if (!( c == '!' || c == '%' || c == '@' || c == '*'|| c == '&')) {
-                return false;
+            if (Character.isUpperCase(c)) {
+                res[1] = true;
+            }
+            if (Character.isLowerCase(c)) {
+                res[2] = true;
+            }
+            if (Character.isDigit(c)) {
+                res[3] = true;
+            }
+
+            if ("!%@*&".indexOf(c) >= 0) {
+                res[4] = true;
             }
         }
-
-        return true;
+        return res[0] && res[1] && res[2] && res[3] && res[4];
     }
 
     @Override

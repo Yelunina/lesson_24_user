@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
     private User user;
     private String email = "john@gmail.com";
-    private String password = "12345678Ait!";
+    private String password = "12345Ab!";
 
     @BeforeEach
     void setUp() {
@@ -65,54 +65,45 @@ class UserTest {
         assertEquals(email, user.getEmail());
     }
 
-    /*
-    TODO Homework
-    1) Min 8 symbols
-    2) Min one symbol in uppercase
-    3) Min one symbol in lowercase
-    4) Min one symbol is digit
-    5) Min one symbol is a special symbol (!%@*&)
-     */
     @Test
     void testValidPassword() {
-        String validPassword = "12345678Ait!";
+        String validPassword = "qwertY1@";
         user.setPassword(validPassword);
-        assertEquals(password, user.getPassword());
+        assertEquals(validPassword, user.getPassword());
     }
 
     @Test
-    void testPasswordMinEightSymbols() {
-        String invalidPassword = "678Ait!";
+    void testPasswordLength() {
+        String invalidPassword = "wertY1@";
         user.setPassword(invalidPassword);
         assertEquals(password, user.getPassword());
     }
 
     @Test
-    void testPasswordMinOneSymbolInUppercase() {
-        String invalidPassword = "5678ait!";
+    void testPasswordUpperCase() {
+        String invalidPassword = "qwerty1@";
         user.setPassword(invalidPassword);
         assertEquals(password, user.getPassword());
     }
 
     @Test
-    void testPasswordMinOneSymbolInLowercase() {
-        String invalidPassword = "5678AIT!";
+    void testPasswordLowerCase() {
+        String invalidPassword = "QWERTY1@";
         user.setPassword(invalidPassword);
         assertEquals(password, user.getPassword());
     }
 
     @Test
-    void testPasswordMinOneSymbolIsDigit() {
-        String invalidPassword = "AitAitT!";
+    void testPasswordDigits() {
+        String invalidPassword = "qwertYz@";
         user.setPassword(invalidPassword);
         assertEquals(password, user.getPassword());
     }
 
     @Test
-    void testPasswordMinOneSymbolIsSpecialSymbol() {
-        String invalidPassword = "678Ait589";
+    void testPasswordSpecialSymbols() {
+        String invalidPassword = "qwertY12";
         user.setPassword(invalidPassword);
         assertEquals(password, user.getPassword());
     }
-
 }
