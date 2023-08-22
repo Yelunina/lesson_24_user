@@ -1,5 +1,9 @@
 package ait.user.model;
 
+/*Продолжить писать код, начатый в классной работе
+ В классе UserTest написать тесты для setPassword. В классе User изменить метод setPassword,
+ чтобы работала валидация пароля исходя из требований указанных в комментарии к коду.
+ */
 public class User {
     private String email;
     private String password;
@@ -61,7 +65,21 @@ public class User {
     5) Min one symbol is a special symbol (!%@*&)
      */
     public void setPassword(String password) {
-        this.password = password;
+        if (passwordIsValid(password)) {
+            this.password = password;
+        } else {
+            System.out.println(password + " is not valid");
+        }
+    }
+    private boolean passwordIsValid(String password) {
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (!( c == '!' || c == '%' || c == '@' || c == '*'|| c == '&')) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
